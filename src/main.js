@@ -10,17 +10,15 @@ define(function (require, exports, module) {
     name: 'Show Deleted Messages',
     description: 'Keeps showing deleted chat messages.',
 
-    enable() {
-      this._super()
-
+    style: {
       // default deleted message styles. can be changed in room styles
       // by room hosts.
-      this.Style({
-        '.cm.extplug-deleted': {
-          'opacity': '0.5'
-        }
-      })
+      '.cm.extplug-deleted': {
+        'opacity': '0.5'
+      }
+    },
 
+    enable() {
       let advice = function (joinpoint) {
         let [ cid ] = joinpoint.args
         // if the last received message is being deleted, make sure new
