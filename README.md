@@ -1,6 +1,8 @@
 Show Deleted Messages
 =====================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/extplug/show-deleted.svg)](https://greenkeeper.io/)
+
 ExtPlug plugin that keeps showing deleted chat messages.
 
 ![Screenshot](http://i.imgur.com/tA1TcZh.png)
