@@ -1,0 +1,5 @@
+/* default deleted message styles. can be changed in room styles
+  * by room hosts. */
+.cm.extplug-deleted {
+  opacity: 0.5;
+}
