@@ -1,11 +1,24 @@
-{ "name": "extplug-show-deleted"
-, "version": "0.0.1"
-, "description": "ExtPlug plugin that styles deleted chat messages instead of removing them."
-, "devDependencies":
-  { "gulp": "^3.8.11"
-  , "gulp-babel": "^5.1.0"
-  , "gulp-concat": "^2.5.2"
-  , "requirejs": "^2.1.17" }
-, "scripts":
-  { "build": "gulp build"
-  , "test": "jshint src" } }
+{
+  "name": "extplug-show-deleted",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "ExtPlug plugin that styles deleted chat messages instead of removing them.",
+  "author": "ReAnna <renee@kooi.me>",
+  "main": "build/show-deleted.js",
+  "repository": "extplug/show-deleted",
+  "keywords": [
+    "extplug-plugin",
+    "plug.dj"
+  ],
+  "files": [
+    "build",
+    "src"
+  ],
+  "devDependencies": {
+    "extplug-cli": "^1.0.0"
+  },
+  "scripts": {
+    "prepublish": "npm run build -- --minify",
+    "build": "extplug bundle src/main.js build/show-deleted.js"
+  }
+}
