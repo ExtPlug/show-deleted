@@ -1,6 +1,6 @@
 {
   "name": "extplug-show-deleted",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "description": "ExtPlug plugin that styles deleted chat messages instead of removing them.",
   "author": "ReAnna <renee@kooi.me>",
