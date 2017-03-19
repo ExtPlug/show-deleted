@@ -42,7 +42,7 @@ const ShowDeleted = Plugin.extend({
       lastDeleteEvent = null
     }
 
-    this.listenTo('socket:chatDelete', (del) => {
+    this.listenTo(Events, 'socket:chatDelete', (del) => {
       lastDeleteEvent = del
     })
 
