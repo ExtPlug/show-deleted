@@ -21,18 +21,12 @@ https://unpkg.com/extplug-show-deleted
 
 **Note: This section is intended for room hosts only.**
 
-Deleted chat messages are styled with the ".cm.extplug-deleted" class. Use this class if you
-wish to style messages specially in your Room Style.
+Deleted chat messages are styled with the ".cm.extplug-deleted" class. Use this
+class if you want to style messages differently in your Room Style.
 
-```json
-{
-  "css": {
-    "rule": {
-      ".cm.extplug-deleted": {
-        "background-color": "red"
-      }
-    }
-  }
+```css
+.cm.extplug-deleted {
+  background-color: red;
 }
 ```
 
