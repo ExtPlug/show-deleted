@@ -1,3 +1,4 @@
+/* global API */
 import Plugin from 'extplug/Plugin'
 import ChatView from 'plug/views/rooms/chat/ChatView'
 import PopoutChatView from 'plug/views/rooms/popout/PopoutChatView'
@@ -11,8 +12,10 @@ const ShowDeleted = Plugin.extend({
 
   style,
 
-  enable() {
-    function advice(joinpoint) {
+  enable () {
+    let lastDeleteEvent = null
+
+    function advice (joinpoint) {
       const [ cid ] = joinpoint.args
       // if the last received message is being deleted, make sure new
       // messages don't collapse into its <div>
@@ -23,9 +26,25 @@ const ShowDeleted = Plugin.extend({
       const message = this.$(`.cid-${cid}`).closest('.cm')
       if (!message.hasClass('extplug-deleted')) {
         message.addClass('extplug-deleted')
-        message.find('.timestamp').prepend('[Deleted] ')
+        const timestamp = message.find('.timestamp')
+        timestamp.prepend('[Deleted] ')
+
+        // Add a tooltip showing the user who deleted the message.
+        const moderator = lastDeleteEvent && API.getUser(lastDeleteEvent.mi)
+        if (moderator) {
+          timestamp.attr({
+            'data-tooltip-dir': 'left',
+            'data-tooltip': `Deleted by ${moderator.username}`
+          })
+        }
       }
+
+      lastDeleteEvent = null
     }
+
+    this.listenTo('socket:chatDelete', (del) => {
+      lastDeleteEvent = del
+    })
 
     this.replaceEvents(() => {
       this.mainAdvice = around(ChatView.prototype, 'onDelete', advice)
@@ -33,7 +52,7 @@ const ShowDeleted = Plugin.extend({
     })
   },
 
-  disable() {
+  disable () {
     this.replaceEvents(() => {
       this.mainAdvice.remove()
       this.popAdvice.remove()
@@ -42,7 +61,7 @@ const ShowDeleted = Plugin.extend({
   },
 
   // safely replace the onDelete method, keeping the event handler around
-  replaceEvents(cb) {
+  replaceEvents (cb) {
     const chatView = this.ext.appView.room.chat
     if (chatView) Events.off('chat:delete', chatView.onDelete)
     cb()
